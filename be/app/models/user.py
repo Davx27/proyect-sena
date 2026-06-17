@@ -115,7 +115,7 @@ class User(Base):
     #           hacer clic en el enlace de verificación enviado a su email.
     is_email_verified: Mapped[bool] = mapped_column(
         Boolean,
-        default=False,
+        default=True,
         nullable=False,
     )
 

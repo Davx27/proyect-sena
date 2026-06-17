@@ -18,12 +18,16 @@ import {
   LogOut,
   ChevronsLeft,
   ChevronsRight,
+  CalendarDays,
+  GraduationCap,
+  BookOpen,
+  PieChart
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/hooks/useAuth";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
-import { NNAuthLogo } from "@/pages/LandingPage";
+
 
 interface AppShellProps {
   children: ReactNode;
@@ -35,31 +39,55 @@ interface AppShellProps {
 const NAV_ITEMS = [
   {
     icon: LayoutDashboard,
-    labelKey: "nav.sidebar.dashboard",
+    labelKey: "Inicio",
     href: "/dashboard",
     enabled: true,
   },
   {
-    icon: Users,
-    labelKey: "nav.sidebar.employees",
-    href: null,
-    enabled: false,
+    icon: CalendarDays,
+    labelKey: "Horarios",
+    href: "/horarios",
+    enabled: true,
   },
   {
-    icon: Package,
-    labelKey: "nav.sidebar.products",
-    href: null,
-    enabled: false,
+    icon: Package, 
+    labelKey: "Ambientes",
+    href: "/ambientes",
+    enabled: true,
+  },
+  {
+    icon: Users,
+    labelKey: "Instructores",
+    href: "/instructores",
+    enabled: true,
+  },
+  {
+    icon: GraduationCap,
+    labelKey: "Aprendices",
+    href: "/aprendices",
+    enabled: true,
+  },
+  {
+    icon: BookOpen,
+    labelKey: "Programas",
+    href: "/programas",
+    enabled: true,
   },
   {
     icon: BarChart3,
-    labelKey: "nav.sidebar.reports",
-    href: null,
-    enabled: false,
+    labelKey: "Fichas",
+    href: "/fichas",
+    enabled: true,
+  },
+  {
+    icon: PieChart,
+    labelKey: "Reportes",
+    href: "/reportes",
+    enabled: true,
   },
   {
     icon: ShieldCheck,
-    labelKey: "nav.sidebar.security",
+    labelKey: "Seguridad",
     href: "/change-password",
     enabled: true,
   },
@@ -105,9 +133,9 @@ export function AppShell({ children }: AppShellProps) {
             ${collapsed ? "justify-center px-0" : "gap-3 px-4"}
           `}
         >
-          <NNAuthLogo size={26} />
+          <img src="/SENA-LOGO.png" alt="Logo SENA" className="h-8 w-auto object-contain" />
           {!collapsed && (
-            <span className="truncate text-sm font-semibold text-gray-100">NN Auth System</span>
+            <span className="truncate text-sm font-semibold text-gray-80">SENA</span>
           )}
         </div>
 
@@ -121,7 +149,7 @@ export function AppShell({ children }: AppShellProps) {
         <nav className="flex-1 overflow-y-auto py-3" aria-label="Navegación de la aplicación">
           <ul className="space-y-0.5 px-2" role="list">
             {NAV_ITEMS.map(({ icon: Icon, labelKey, href, enabled }) => {
-              const label = t(labelKey);
+              const label = labelKey; 
 
               // Ítem con ruta real → NavLink detecta el estado activo automáticamente
               if (enabled && href) {
@@ -232,11 +260,25 @@ export function AppShell({ children }: AppShellProps) {
           ¿Impacto? El sidebar oscuro fijo + esta barra clara crean jerarquía visual clara.
         */}
         <header
-          className="flex h-14 shrink-0 items-center justify-end gap-2 border-b border-gray-200
+          className="flex h-14 shrink-0 items-center justify-end gap-3 border-b border-gray-200
             bg-white px-5 dark:border-gray-800 dark:bg-gray-900"
         >
           <LanguageSwitcher />
           <ThemeToggle />
+          
+          <button className="flex items-center gap-2 pl-3 ml-2 border-l border-gray-200 dark:border-gray-700 hover:opacity-80 transition-opacity">
+            <div className="text-right hidden sm:block">
+              <p className="text-sm font-bold text-gray-900 dark:text-white">
+                {user?.first_name ? `${user.first_name} ${user.last_name}` : "David Mendieta"}
+              </p>
+              <p className="text-xs text-emerald-600 dark:text-emerald-400">Administrador</p>
+            </div>
+            <img 
+              src={`https://ui-avatars.com/api/?name=${user?.first_name || 'David'}+${user?.last_name || 'M'}&background=059669&color=fff`} 
+              alt="Foto perfil" 
+              className="h-8 w-8 rounded-full border border-gray-200 dark:border-gray-700 shadow-sm"
+            />
+          </button>
         </header>
 
         {/* Área de contenido — renderiza la página activa */}

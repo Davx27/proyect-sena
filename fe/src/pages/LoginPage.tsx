@@ -9,12 +9,10 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Mail, Lock } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useAuth } from "@/hooks/useAuth";
-import { Modal } from "@/components/ui/Modal";
-import { LandingPage } from "@/pages/LandingPage";
-import { InputField } from "@/components/ui/InputField";
-import { Button } from "@/components/ui/Button";
-import { Alert } from "@/components/ui/Alert";
+import { useAuth } from "../hooks/useAuth";
+import { InputField } from "../components/ui/InputField";
+import { Button } from "../components/ui/Button";
+import { Alert } from "../components/ui/Alert";
 
 /**
  * ¿Qué? Página de login con formulario, manejo de errores y redirección post-login.
@@ -22,9 +20,9 @@ import { Alert } from "@/components/ui/Alert";
  * ¿Impacto? Una vez autenticado, se redirige al dashboard automáticamente.
  *
  * i18n pedagógico:
- *   useTranslation() provee t() — función que recibe una clave y retorna el texto
- *   en el idioma activo. Ejemplo: t("auth.login.title") → "Iniciar sesión" (es) | "Sign in" (en).
- *   Si el usuario cambia idioma, este componente se re-renderiza automáticamente.
+ * useTranslation() provee t() — función que recibe una clave y retorna el texto
+ * en el idioma activo. Ejemplo: t("auth.login.title") → "Iniciar sesión" (es) | "Sign in" (en).
+ * Si el usuario cambia idioma, este componente se re-renderiza automáticamente.
  */
 export function LoginPage() {
   const navigate = useNavigate();
@@ -73,81 +71,102 @@ export function LoginPage() {
   };
 
   return (
-    <>
-      <LandingPage />
-      <Modal onClose={() => navigate("/")} aria-label={t("auth.login.title")}>
-        <div className="p-6 sm:p-8">
-          <div className="mb-6">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-              {t("auth.login.title")}
-            </h2>
-            <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-              {t("auth.login.subtitle")}
-            </p>
+    <div className="min-h-screen flex bg-gray-100">
+
+      {/* Menú lateral */}
+      <div className="w-64 bg-white shadow-md">
+        <div className="p-6 border-b">
+          <h1 className="text-2xl font-bold text-green-700">
+            SENA
+          </h1>
+          <p className="text-sm text-gray-500">
+            Gestión de Horarios
+          </p>
+        </div>
+
+        <nav className="p-4 space-y-4">
+          <div className="text-green-700 font-semibold">
+            Dashboard
           </div>
 
-          {/* ¿Qué? Alerta de error visible cuando el login falla. */}
+          <div className="text-gray-600">
+            Horarios
+          </div>
+
+          <div className="text-gray-600">
+            Ambientes
+          </div>
+        </nav>
+      </div>
+
+      {/* Contenido principal */}
+      <div className="flex-1 flex items-center justify-center">
+
+        <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+
+          <h2 className="text-3xl font-bold text-center mb-2">
+            Iniciar Sesión
+          </h2>
+
+          <p className="text-center text-gray-500 mb-6">
+            Sistema de Gestión de Horarios
+          </p>
+
           {error && (
             <div className="mb-4">
-              <Alert type="error" message={error} onClose={() => setError(null)} />
+              <Alert
+                type="error"
+                message={error}
+                onClose={() => setError(null)}
+              />
             </div>
           )}
 
           <form onSubmit={handleSubmit} noValidate>
+
             <InputField
-              label={t("common.email")}
+              label="Correo electrónico"
               name="email"
               type="email"
               value={formData.email}
-              placeholder={t("common.emailPlaceholder")}
-              autoComplete="email"
-              autoFocus
+              placeholder="correo@sena.edu.co"
               icon={<Mail className="h-5 w-5" />}
               onChange={handleChange}
             />
 
             <InputField
-              label={t("common.password")}
+              label="Contraseña"
               name="password"
               type="password"
               value={formData.password}
-              placeholder={t("common.passwordPlaceholder")}
-              autoComplete="current-password"
+              placeholder="********"
               icon={<Lock className="h-5 w-5" />}
               onChange={handleChange}
             />
 
-            {/* ¿Qué? Enlace a recuperación de contraseña. */}
-            <div className="mb-6 flex justify-end">
+            <div className="mb-4 flex justify-end">
               <Link
                 to="/forgot-password"
-                className="text-sm text-accent-600 hover:text-accent-700 dark:text-accent-400 dark:hover:text-accent-300"
+                className="text-green-700 text-sm"
               >
-                {t("auth.login.forgotPassword")}
+                ¿Olvidaste tu contraseña?
               </Link>
             </div>
 
-            {/* ¿Qué? Botón de submit con estado de carga. */}
-            {/* ¿Para qué? Enviar el formulario y deshabilitarse mientras se procesa. */}
-            <div className="flex justify-end">
-              <Button type="submit" fullWidth isLoading={isLoading}>
-                {t("auth.login.submit")}
-              </Button>
-            </div>
+            <Button
+              type="submit"
+              fullWidth
+              isLoading={isLoading}
+            >
+              Ingresar
+            </Button>
+
           </form>
 
-          {/* ¿Qué? Enlace a la página de registro. */}
-          <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
-            {t("auth.login.noAccount")}{" "}
-            <Link
-              to="/register"
-              className="font-medium text-accent-600 hover:text-accent-700 dark:text-accent-400 dark:hover:text-accent-300"
-            >
-              {t("auth.login.createAccountLink")}
-            </Link>
-          </p>
         </div>
-      </Modal>
-    </>
+
+      </div>
+
+    </div>
   );
 }
