@@ -29,6 +29,7 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 
 
+
 interface AppShellProps {
   children: ReactNode;
 }
@@ -39,55 +40,55 @@ interface AppShellProps {
 const NAV_ITEMS = [
   {
     icon: LayoutDashboard,
-    labelKey: "Inicio",
+    labelKey: "nav.sidebar.dashboard",
     href: "/dashboard",
     enabled: true,
   },
   {
     icon: CalendarDays,
-    labelKey: "Horarios",
+    labelKey: "nav.sidebar.schedules",
     href: "/horarios",
     enabled: true,
   },
   {
     icon: Package, 
-    labelKey: "Ambientes",
+    labelKey: "nav.sidebar.environments",
     href: "/ambientes",
     enabled: true,
   },
   {
     icon: Users,
-    labelKey: "Instructores",
+    labelKey: "nav.sidebar.instructors",
     href: "/instructores",
     enabled: true,
   },
   {
     icon: GraduationCap,
-    labelKey: "Aprendices",
+    labelKey: "nav.sidebar.apprentices",
     href: "/aprendices",
     enabled: true,
   },
   {
     icon: BookOpen,
-    labelKey: "Programas",
+    labelKey: "nav.sidebar.programs",
     href: "/programas",
     enabled: true,
   },
   {
     icon: BarChart3,
-    labelKey: "Fichas",
+    labelKey: "nav.sidebar.files",
     href: "/fichas",
     enabled: true,
   },
   {
     icon: PieChart,
-    labelKey: "Reportes",
+    labelKey: "nav.sidebar.reports",
     href: "/reportes",
     enabled: true,
   },
   {
     icon: ShieldCheck,
-    labelKey: "Seguridad",
+    labelKey: "nav.sidebar.security",
     href: "/change-password",
     enabled: true,
   },
@@ -149,7 +150,7 @@ export function AppShell({ children }: AppShellProps) {
         <nav className="flex-1 overflow-y-auto py-3" aria-label="Navegación de la aplicación">
           <ul className="space-y-0.5 px-2" role="list">
             {NAV_ITEMS.map(({ icon: Icon, labelKey, href, enabled }) => {
-              const label = labelKey; 
+              const label = t(labelKey); 
 
               // Ítem con ruta real → NavLink detecta el estado activo automáticamente
               if (enabled && href) {

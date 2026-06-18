@@ -5,8 +5,12 @@
     "language": "Language",
     "sidebar": {
       "dashboard": "Dashboard",
-      "employees": "Employees",
-      "products": "Products",
+      "schedules": "Schedules",
+      "environments": "Environments",
+      "instructors": "Instructors",
+      "apprentices": "Apprentices",
+      "programs": "Programs",
+      "files": "Files",
       "reports": "Reports",
       "security": "Security",
       "comingSoon": "soon"
@@ -134,7 +138,37 @@
     "accountStatus": "Account status: {{status}}",
     "changePasswordButton": "Change password",
     "languageTitle": "Interface language",
-    "languageSubtitle": "Select the language in which the application will be displayed"
+    "languageSubtitle": "Select the language in which the application will be displayed",
+    "trainingCenter": "Training Center",
+    "totalEnvironments": "Total Environments",
+    "activeInstructors": "Active Instructors",
+    "environmentsDesc": "Registered training spaces",
+    "instructorsDesc": "Linked teachers",
+    "filesDesc": "Active training groups",
+    "programsDesc": "Academic programs",
+    "quickActions": "Quick Actions",
+    "quickActionsSubtitle": "Direct resource management",
+    "actionInstructors": "Instructors",
+    "actionInstructorsSub": "View assignments",
+    "actionFiles": "Cohorts",
+    "actionFilesSub": "Manage groups",
+    "actionReports": "Reports",
+    "actionReportsSub": "Download statistics",
+    "actionUsers": "Users",
+    "actionUsersSub": "Access control",
+    "environmentsSub": "5 in maintenance",
+    "instructorsSub": "15 new this month",
+    "apprentices": "Apprentices",
+    "apprenticesSub": "32 active cohorts",
+    "schedules": "Scheduled Shifts",
+    "schedulesSub": "This week",
+    "todaySchedule": "Today's Schedule",
+    "todayScheduleSub": "Classes scheduled for today",
+    "viewFullWeek": "View Full Week",
+    "actionCreate": "Create Schedule",
+    "actionCreateSub": "New schedule",
+    "actionManageEnv": "Manage Environments",
+    "actionManageEnvSub": "View availability"
   },
   "language": {
     "selector": "Language",
@@ -380,7 +414,10 @@
     }
   },
   "landing": {
-    "nav": { "login": "Sign in", "register": "Sign up" },
+    "nav": {
+      "login": "Sign in",
+      "register": "Sign up"
+    },
     "hero": {
       "title": "Secure authentication,",
       "titleHighlight": "production ready",
